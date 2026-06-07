@@ -4,44 +4,29 @@ import pandas as pd
 # 1. إعدادات الصفحة
 st.set_page_config(page_title="Cipher Edge Network", page_icon="💎", layout="centered")
 
-# 2. نظام الثيم
+# 2. نظام الثيم (الإضاءة)
 if 'theme' not in st.session_state: st.session_state.theme = 'Dark'
-bg_color = "#ffffff" if st.session_state.theme == 'Light' else "#0b0f17"
-text_color = "#000000" if st.session_state.theme == 'Light' else "#ffffff"
+bg = "#ffffff" if st.session_state.theme == 'Light' else "#0b0f17"
+txt = "#000000" if st.session_state.theme == 'Light' else "#ffffff"
 
-# 3. دمج الـ CSS بشكل آمن (هنا كان الخطأ)
-st.markdown(f"""
-    <style>
-        .stApp {{ background-color: {bg_color} !important; }}
-        h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {text_color} !important; }}
-        .block-container {{ max-width: 480px !important; padding-top: 1rem !important; }}
-        .stButton > button {{ background-color: #00f2ff !important; color: #000000 !important; font-weight: bold !important; }}
-    </style>
-""", unsafe_allow_html=True)
-
-# 4. المترجم وزر الإضاءة
+# 3. عرض الزر والمترجم
 col1, col2 = st.columns([1, 4])
 with col1:
-    if st.button("☀️ / 🌙", key="theme_btn"):
+    if st.button("☀️/🌙", key="theme_toggle"):
         st.session_state.theme = 'Light' if st.session_state.theme == 'Dark' else 'Dark'
         st.rerun()
 with col2:
-    st.markdown("""
-        <div id="google_translate_element"></div>
-        <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-            }
-        </script>
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    """, unsafe_allow_html=True)
+    st.markdown('<div id="google_translate_element"></div><script>function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:"en"}, "google_translate_element");}</script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>', unsafe_allow_html=True)
 
-# --- هنا يبدأ منطق التطبيق الخاص بك (لا تضع أي CSS هنا) ---
-if "logged_in" not in st.session_state: st.session_state["logged_in"] = False
+# 4. الـ CSS (بدون أي مسافات بادئة خاطئة)
+st.markdown(f"""
+<style>
+    .stApp {{ background-color: {bg} !important; }}
+    h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {txt} !important; }}
+</style>
+""", unsafe_allow_html=True)
 
-
-
-    </script>
+# 5.     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 """, unsafe_allow_html=True)
 
