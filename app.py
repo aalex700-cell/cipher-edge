@@ -1,25 +1,28 @@
 import streamlit as st
 import pandas as pd
 
-# تهيئة حالة الإضاءة
-if 'theme' not in st.session_state: st.session_state.theme = 'Dark'
+# 1. إعدادات الصفحة
+st.set_page_config(page_title="Cipher Edge Network", page_icon="💎", layout="centered")
 
-# تحديد الألوان حسب الحالة
+# 2. نظام الثيم
+if 'theme' not in st.session_state: st.session_state.theme = 'Dark'
 bg_color = "#ffffff" if st.session_state.theme == 'Light' else "#0b0f17"
 text_color = "#000000" if st.session_state.theme == 'Light' else "#ffffff"
 
-# كود CSS ديناميكي
+# 3. دمج الـ CSS بشكل آمن (هنا كان الخطأ)
 st.markdown(f"""
     <style>
         .stApp {{ background-color: {bg_color} !important; }}
         h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {text_color} !important; }}
+        .block-container {{ max-width: 480px !important; padding-top: 1rem !important; }}
+        .stButton > button {{ background-color: #00f2ff !important; color: #000000 !important; font-weight: bold !important; }}
     </style>
 """, unsafe_allow_html=True)
 
-# إضافة المترجم والزر في الأعلى
+# 4. المترجم وزر الإضاءة
 col1, col2 = st.columns([1, 4])
 with col1:
-    if st.button("☀️ / 🌙"):
+    if st.button("☀️ / 🌙", key="theme_btn"):
         st.session_state.theme = 'Light' if st.session_state.theme == 'Dark' else 'Dark'
         st.rerun()
 with col2:
@@ -32,20 +35,9 @@ with col2:
         </script>
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     """, unsafe_allow_html=True)
-    <style>
-        .stApp, [data-testid="stSidebar"], .stSidebar {{ background-color: {bg_color} !important; }}
-        h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {text_color} !important; }}
-        .stButton > button {{ background-color: #00f2ff !important; color: #000000 !important; font-weight: bold !important; border: 1px solid #00f2ff !important; }}
-    </style>
-""", unsafe_allow_html=True)
 
-# 3. زر الإضاءة والمترجم (المدمج في الأعلى)
-col_ui, col_tr = st.columns([1, 4])
-with col_ui:
-    if st.button("☀️/🌙", key="btn_theme"): toggle_theme(); st.rerun()
-with col_tr:
-    st.markdown('<div id="google_translate_element"></div><script type="text/javascript">function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, "google_translate_element");}</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>', unsafe_allow_html=True)
-
+# --- هنا يبدأ منطق التطبيق الخاص بك (لا تضع أي CSS هنا) ---
+if "logged_in" not in st.session_state: st.session_state["logged_in"] = False
 import streamlit as st
 import pandas as pd
 
