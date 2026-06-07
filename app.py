@@ -40,24 +40,7 @@ with col2:
 if "logged_in" not in st.session_state: st.session_state["logged_in"] = False
 
 
-# 1. إعدادات الصفحة والترجمة الذكية
-st.set_page_config(
-    page_title="Cipher Edge Network",
-    page_icon="💎",
-    layout="centered",
-    initial_sidebar_state="expanded"
-)
 
-# إضافة أداة ترجمة جوجل الرسمية في أعلى التطبيق
-st.markdown("""
-    <div id="google_translate_element" style="text-align:right; padding:5px;"></div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 """, unsafe_allow_html=True)
