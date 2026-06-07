@@ -1,33 +1,37 @@
 import streamlit as st
 import pandas as pd
-# --- إضافة الزر والمترجم في قمة الصفحة ---
-st.markdown("""
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div id="google_translate_element"></div>
-    </div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-""", unsafe_allow_html=True)
 
-if st.button("☀️ / 🌙 تبديل النمط"):
-    st.session_state.theme = 'Light' if st.session_state.get('theme', 'Dark') == 'Dark' else 'Dark'
-    st.rerun()
-
-# --- بقية كودك القديم يبدأ من هنا ---
-# 1. إعدادات الصفحة
-st.set_page_config(page_title="Cipher Edge Network", page_icon="💎", layout="centered", initial_sidebar_state="expanded")
-
-# 2. نظام الإضاءة (تأكد أن هذا الكود في الأعلى)
+# تهيئة حالة الإضاءة
 if 'theme' not in st.session_state: st.session_state.theme = 'Dark'
-def toggle_theme(): st.session_state.theme = 'Light' if st.session_state.theme == 'Dark' else 'Dark'
+
+# تحديد الألوان حسب الحالة
 bg_color = "#ffffff" if st.session_state.theme == 'Light' else "#0b0f17"
 text_color = "#000000" if st.session_state.theme == 'Light' else "#ffffff"
 
+# كود CSS ديناميكي
 st.markdown(f"""
+    <style>
+        .stApp {{ background-color: {bg_color} !important; }}
+        h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {text_color} !important; }}
+    </style>
+""", unsafe_allow_html=True)
+
+# إضافة المترجم والزر في الأعلى
+col1, col2 = st.columns([1, 4])
+with col1:
+    if st.button("☀️ / 🌙"):
+        st.session_state.theme = 'Light' if st.session_state.theme == 'Dark' else 'Dark'
+        st.rerun()
+with col2:
+    st.markdown("""
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    """, unsafe_allow_html=True)
     <style>
         .stApp, [data-testid="stSidebar"], .stSidebar {{ background-color: {bg_color} !important; }}
         h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {text_color} !important; }}
