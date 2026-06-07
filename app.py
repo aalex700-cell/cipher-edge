@@ -16,17 +16,22 @@ with col1:
         st.session_state.theme = 'Light' if st.session_state.theme == 'Dark' else 'Dark'
         st.rerun()
 
+# استبدل كود المترجم السابق بهذا الكود فقط
 with col2:
-    st.components.v1.html("""
+    st.markdown("""
         <div id="google_translate_element"></div>
-        <script type="text/javascript">
+        <script>
             function googleTranslateElementInit() {
                 new google.translate.TranslateElement({
                     pageLanguage: 'en',
-                    includedLanguages: 'ar,en,fr,es',
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
                 }, 'google_translate_element');
             }
         </script>
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    """, height=50)
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <style>
+            #google_translate_element { position: absolute; right: 10px; top: 10px; }
+            .goog-te-gadget-simple { background-color: transparent !important; border: none !important; }
+            .goog-te-gadget-simple span { color: #00f2ff !important; }
+        </style>
+    """, unsafe_allow_html=True)
