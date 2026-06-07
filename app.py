@@ -38,8 +38,7 @@ with col2:
 
 # --- هنا يبدأ منطق التطبيق الخاص بك (لا تضع أي CSS هنا) ---
 if "logged_in" not in st.session_state: st.session_state["logged_in"] = False
-import streamlit as st
-import pandas as pd
+
 
 # 1. إعدادات الصفحة والترجمة الذكية
 st.set_page_config(
