@@ -17,11 +17,16 @@ with col1:
         st.rerun()
 
 with col2:
-    st.markdown('<div id="google_translate_element"></div><script type="text/javascript">function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, "google_translate_element");}</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>', unsafe_allow_html=True)
-
-st.markdown(f"""
-<style>
-.stApp {{ background-color: {bg} !important; }}
-h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {txt} !important; }}
-</style>
-""", unsafe_allow_html=True)
+    st.components.v1.html("""
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'ar,en,fr,es',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                }, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    """, height=50)
