@@ -4,69 +4,28 @@ import pandas as pd
 # 1. إعدادات الصفحة
 st.set_page_config(page_title="Cipher Edge Network", page_icon="💎", layout="centered", initial_sidebar_state="expanded")
 
-# 2. نظام الإضاءة (حفظ الحالة)
+# 2. نظام الإضاءة (تأكد أن هذا الكود في الأعلى)
 if 'theme' not in st.session_state: st.session_state.theme = 'Dark'
 def toggle_theme(): st.session_state.theme = 'Light' if st.session_state.theme == 'Dark' else 'Dark'
-
 bg_color = "#ffffff" if st.session_state.theme == 'Light' else "#0b0f17"
 text_color = "#000000" if st.session_state.theme == 'Light' else "#ffffff"
 
-# 3. دمج التنسيقات (CSS) مع نظام الإضاءة + المترجم
 st.markdown(f"""
     <style>
         .stApp, [data-testid="stSidebar"], .stSidebar {{ background-color: {bg_color} !important; }}
         h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {text_color} !important; }}
         .stButton > button {{ background-color: #00f2ff !important; color: #000000 !important; font-weight: bold !important; border: 1px solid #00f2ff !important; }}
-        .stButton > button:hover {{ background-color: #00ff88 !important; border-color: #00ff88 !important; box-shadow: 0 0 20px rgba(0, 255, 136, 0.8) !important; }}
     </style>
 """, unsafe_allow_html=True)
 
-# إضافة زر الإضاءة والمترجم
+# 3. زر الإضاءة والمترجم (المدمج في الأعلى)
 col_ui, col_tr = st.columns([1, 4])
 with col_ui:
-    if st.button("☀️/🌙" if st.session_state.theme == 'Dark' else "🌙/☀️"):
-        toggle_theme()
-        st.rerun()
+    if st.button("☀️/🌙", key="btn_theme"): toggle_theme(); st.rerun()
 with col_tr:
     st.markdown('<div id="google_translate_element"></div><script type="text/javascript">function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, "google_translate_element");}</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>', unsafe_allow_html=True)
 
-# 4. تهيئة البيانات (كما في كودك الأصلي)
-if "logged_in" not in st.session_state: st.session_state["logged_in"] = False
-if "username" not in st.session_state: st.session_state["username"] = ""
-if "role" not in st.session_state: st.session_state["role"] = "user"
-if "current_view" not in st.session_state: st.session_state["current_view"] = "Dashboard"
-if "supervisors" not in st.session_state: st.session_state["supervisors"] = {"sub_admin1": "Super2026"}
-if "users_db" not in st.session_state: st.session_state["users_db"] = {"AhmedAli100601": {"name": "Ahmed Ali", "email": "ahmed@cipher.io", "phone": "+201000000000", "status": "active", "kyc_front": None, "kyc_back": None, "kyc_selfie": None, "kyc_verified": False, "wallet_name": "Binance", "wallet_address": "TY7xxxxxxxxx...xxxx", "fixed_deposit_wallet": "TRX_PERMANENT_DEPOSIT_ADDRESS_001", "total_deposit": 5000.0, "total_withdraw": 0.0, "total_rewards": 250.0, "withdraw_status": "None", "p_image": None}}
-if "global_notices" not in st.session_state: st.session_state["global_notices"] = ["🚀 Welcome to Cipher Edge VIP Network Node."]
-if "private_notices" not in st.session_state: st.session_state["private_notices"] = {"AhmedAli100601": []}
-if "support_tickets" not in st.session_state: st.session_state["support_tickets"] = {"AhmedAli100601": []}
-
-# --- بوابة الدخول (Log in) ---
-if not st.session_state["logged_in"]:
-    st.markdown('<h1 style="text-align:center;">CIPHER EDGE</h1>', unsafe_allow_html=True)
-    tab_login, tab_signup = st.tabs(["🔒 Log in", "📝 Registration"])
-    with tab_login:
-        in_user = st.text_input("Username *")
-        in_pass = st.text_input("Password *", type="password")
-        if st.button("Log in ⚡", use_container_width=True):
-            if in_user == "Admin_Cipher" and in_pass == "Cipher2026":
-                st.session_state.update({"logged_in": True, "username": "Super Admin", "role": "admin", "current_view": "AdminDashboard"})
-                st.rerun()
-            elif in_user in st.session_state["users_db"]:
-                st.session_state.update({"logged_in": True, "username": in_user, "role": "user", "current_view": "Dashboard"})
-                st.rerun()
-            else: st.error("Invalid credentials.")
-
-# --- لوحة تحكم الأدمن (بقية كودك الأصلي) ---
-elif st.session_state["role"] in ["admin", "supervisor"]:
-    # (هنا يوضع كود الأدمن الخاص بك كاملاً)
-    st.write("Admin Dashboard Active")
-
-# --- لوحة تحكم المستخدم (بقية كودك الأصلي) ---
-elif st.session_state["role"] == "user":
-    # (هنا يوضع كود المستخدم الخاص بك كاملاً)
-    st.write("User Dashboard Active")
-    import streamlit as st
+import streamlit as st
 import pandas as pd
 
 # 1. إعدادات الصفحة والترجمة الذكية
