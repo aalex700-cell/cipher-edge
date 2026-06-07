@@ -1,6 +1,23 @@
 import streamlit as st
 import pandas as pd
+# --- إضافة الزر والمترجم في قمة الصفحة ---
+st.markdown("""
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div id="google_translate_element"></div>
+    </div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+""", unsafe_allow_html=True)
 
+if st.button("☀️ / 🌙 تبديل النمط"):
+    st.session_state.theme = 'Light' if st.session_state.get('theme', 'Dark') == 'Dark' else 'Dark'
+    st.rerun()
+
+# --- بقية كودك القديم يبدأ من هنا ---
 # 1. إعدادات الصفحة
 st.set_page_config(page_title="Cipher Edge Network", page_icon="💎", layout="centered", initial_sidebar_state="expanded")
 
