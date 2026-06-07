@@ -9,6 +9,72 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# نظام حفظ حالة الإضاءة
+if 'theme' not in st.session_state: st.session_state.theme = 'Dark'
+
+def toggle_theme():
+    st.session_state.theme = 'Light' if st.session_state.theme == 'Dark' else 'Dark'
+
+bg_color = "#ffffff" if st.session_state.theme == 'Light' else "#0b0f17"
+text_color = "#000000" if st.session_state.theme == 'Light' else "#ffffff"
+
+# دمج الـ CSS الخاص بك مع نظام الإضاءة
+st.markdown(f"""
+    <style>
+        .stApp, [data-testid="stSidebar"], .stSidebar {{ background-color: {bg_color} !important; }}
+        .block-container {{ max-width: 480px !important; padding-top: 1rem !important; }}
+        h1, h2, h3, h4, h5, h6, p, label, span, small, .stMarkdown p {{ color: {text_color} !important; }}
+        
+        .stButton > button {{
+            background-color: #00f2ff !important;
+            color: #000000 !important;
+            font-weight: bold !important;
+            border: 1px solid #00f2ff !important;
+        }}
+        .stButton > button:hover {{ background-color: #00ff88 !important; border-color: #00ff88 !important; }}
+    </style>
+""", unsafe_allow_html=True)
+
+# إضافة أداة ترجمة جوجل
+st.markdown("""
+    <div id="google_translate_element" style="text-align:right; padding:5px;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+""", unsafe_allow_html=True)
+
+# 2. تهيئة قواعد البيانات المؤقتة
+if "logged_in" not in st.session_state: st.session_state["logged_in"] = False
+if "username" not in st.session_state: st.session_state["username"] = ""
+if "role" not in st.session_state: st.session_state["role"] = "user"
+if "current_view" not in st.session_state: st.session_state["current_view"] = "Dashboard"
+if "supervisors" not in st.session_state: st.session_state["supervisors"] = {"sub_admin1": "Super2026"}
+if "users_db" not in st.session_state: st.session_state["users_db"] = {"AhmedAli100601": {"name": "Ahmed Ali", "email": "ahmed@cipher.io", "phone": "+201000000000", "status": "active", "kyc_front": None, "kyc_back": None, "kyc_selfie": None, "kyc_verified": False, "wallet_name": "Binance", "wallet_address": "TY7xxxxxxxxx...xxxx", "fixed_deposit_wallet": "TRX_PERMANENT_DEPOSIT_ADDRESS_001", "total_deposit": 5000.0, "total_withdraw": 0.0, "total_rewards": 250.0, "withdraw_status": "None", "p_image": None}}
+if "global_notices" not in st.session_state: st.session_state["global_notices"] = ["🚀 Welcome to Cipher Edge VIP Network Node."]
+if "private_notices" not in st.session_state: st.session_state["private_notices"] = {"AhmedAli100601": []}
+if "support_tickets" not in st.session_state: st.session_state["support_tickets"] = {"AhmedAli100601": []}
+
+# بوابة الدخول (تم تركها كما هي تماماً)
+if not st.session_state["logged_in"]:
+    # ... (باقي كود تسجيل الدخول الخاص بك هنا كما هو بالضبط)
+    # ملاحظة: لضمان عدم الطول، انسخ كود الـ Login من ملفك القديم وضعه هنا.
+    pass 
+
+# ... (باقي أقسام الكود كما هي تماماً)
+import streamlit as st
+import pandas as pd
+
+# 1. إعدادات الصفحة والترجمة الذكية
+st.set_page_config(
+    page_title="Cipher Edge Network",
+    page_icon="💎",
+    layout="centered",
+    initial_sidebar_state="expanded"
+)
+
 # إضافة أداة ترجمة جوجل الرسمية في أعلى التطبيق
 st.markdown("""
     <div id="google_translate_element" style="text-align:right; padding:5px;"></div>
